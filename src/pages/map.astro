@@ -1,3 +1,6 @@
+---
+import truck from './public/recycling-truck.png'
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +45,8 @@
     // Icon
     var myIcon = L.icon({
         
-        iconUrl: '../images/location-pointer.svg',
-        iconSize: [38, 38],
+        iconUrl: './public/location-pointer.svg',
+        iconSize: [38, 38]
     });
     // Marker
     L.marker([36.8065, 10.1815], { icon : myIcon } ).bindPopup('A pretty CSS3 popup.<br> Easily customizable.').addTo(map);
