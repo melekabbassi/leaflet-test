@@ -42,13 +42,6 @@ import truck from './public/recycling-truck.png'
     // attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     // }).addTo(map);
 
-    // Icon
-    var myIcon = L.icon({
-        
-        iconUrl: './public/location-pointer.svg',
-        iconSize: [38, 38]
-    });
     // Marker
-    L.marker([36.8065, 10.1815], { icon : myIcon } ).bindPopup('A pretty CSS3 popup.<br> Easily customizable.').addTo(map);
-    
+    L.marker([36.8065, 10.1815]).bindPopup('A pretty CSS3 popup.<br> Easily customizable.').addTo(map);
 </script>
