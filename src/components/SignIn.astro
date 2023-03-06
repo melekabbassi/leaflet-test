@@ -74,7 +74,7 @@ SignInButton.addEventListener('click', (event) => {
     .then(data => {
       const validUser = data.find((user) => user.email === emailValue && user.password === passwordValue);
       if (validUser) {
-        window.location.href = '/home';
+        window.location.href = 'home';
       } else {
         alert('Invalid email or password');
       }
