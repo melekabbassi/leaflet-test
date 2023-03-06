@@ -1,7 +1,6 @@
 ---
 import truck from '/recycling-truck.png'
 ---
-
 <div class="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
   <div class="w-full max-w-md space-y-8">
     <div>
@@ -13,11 +12,11 @@ import truck from '/recycling-truck.png'
       <div class="space-y-2 rounded-md shadow-sm w-96">
         <div>
           <label for="email-address" class="sr-only">Email address</label>
-          <input id="email-address" name="email" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" placeholder="Email address">
+          <input id="email-address" name="email" value="" type="email" autocomplete="email" required class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" placeholder="Email address">
         </div>
         <div>
           <label for="password" class="sr-only">Password</label>
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" placeholder="Password">
+          <input id="password" name="password" value="" type="password" autocomplete="current-password" required class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6" placeholder="Password">
         </div>
       </div>
 
@@ -32,7 +31,7 @@ import truck from '/recycling-truck.png'
         </div>
       </div>
 
-      <div class="space-y-2">
+      <div class="signin space-y-2">
         <button type="submit" class="group relative flex w-full justify-center rounded-md bg-green-600 py-2 px-3 text-sm font-semibold text-white hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
           <span class="absolute inset-y-0 left-0 flex items-center pl-3">
             <svg class="h-5 w-5 text-green-500 group-hover:text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -53,3 +52,36 @@ import truck from '/recycling-truck.png'
     </form>
   </div>
 </div>
+
+<script>
+const SignInButton = document.querySelector('.signin');
+
+SignInButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  const email = document.getElementById('email-address') as HTMLInputElement;
+  const password = document.getElementById('password') as HTMLInputElement;
+  const emailValue = email.value;
+  const passwordValue = password.value;
+
+  if (email && password){
+    fetch('http://localhost:8081/users/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const validUser = data.find((user) => user.email === emailValue && user.password === passwordValue);
+      if (validUser) {
+        window.location.href = '/home';
+      } else {
+        alert('Invalid email or password');
+      }
+    })
+    .catch(error => console.error(error));
+  } else {
+    alert('Please enter email and password');
+  }
+});
+</script>
